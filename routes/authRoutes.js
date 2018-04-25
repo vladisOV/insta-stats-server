@@ -9,4 +9,14 @@ module.exports = app => {
     req.logout();
     res.send();
   });
+
+  app.use("/current_user", (req, res, next) => {
+    if (!req.user) {
+      res.redirect("/");
+    }
+    next();
+  });
+  app.get("/current_user", (req, res) => {
+    res.json(req.user);
+  });
 };

@@ -2,6 +2,14 @@ const passport = require("passport");
 const InstagramStrategy = require("passport-instagram").Strategy;
 const keys = require("../config/keys");
 
+passport.serializeUser((user, done) => {
+  done(null, user.token);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
 passport.use(
   new InstagramStrategy(
     {
@@ -10,8 +18,10 @@ passport.use(
       callbackURL: "/auth/instagram/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
-      console.log(accessToken);
+      const user = {
+        token: accessToken
+      };
+      done(null, user);
     }
   )
 );
