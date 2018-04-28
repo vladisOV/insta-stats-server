@@ -3,7 +3,7 @@ const InstagramStrategy = require("passport-instagram").Strategy;
 const keys = require("../config/keys");
 
 passport.serializeUser((user, done) => {
-  done(null, user.token);
+  done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
