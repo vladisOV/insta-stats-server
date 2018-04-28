@@ -3,14 +3,8 @@ import * as actions from "../actions";
 import { connect } from "react-redux";
 
 class UserInfo extends Component {
-  componentDidMount() {
-    console.log(this.props.auth);
-    this.props.fetchUserInfo(this.props.auth);
-  }
-
   render() {
     const { userInfo } = this.props;
-    console.log(this.props);
 
     if (!userInfo) {
       return <div>Loading...</div>;
@@ -18,7 +12,7 @@ class UserInfo extends Component {
 
     return (
       <div>
-        {/* <div className="card">
+        <div className="card">
           <div className="info-block">
             <div className="info-block-primary">
               <img
@@ -43,16 +37,15 @@ class UserInfo extends Component {
               </table>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ userInfo }) {
   return {
-    auth: state.auth,
-    userInfo: state.userInfo
+    userInfo: userInfo.userInfo
   };
 }
 

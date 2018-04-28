@@ -4,8 +4,13 @@ import * as actions from "../actions";
 import { connect } from "react-redux";
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchUser();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    this.props.fetchUserInfo(nextProps.auth);
   }
 
   render() {
@@ -13,4 +18,10 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps, actions)(App);
